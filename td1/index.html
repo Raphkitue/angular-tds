@@ -8,15 +8,24 @@
     <meta charset="UTF-8">
     <title>TD1</title>
 </head>
-<body>
-<div class="panel-heading">Ex 1 : Note Application</div>
-<div class="panel-body">
-   <div class="form-group">
-       <label for="messageNote">Note :</label>
-       <textarea name="messageNote" id="messageNote" cols="40" rows="5" class="form-control ng-valid ng-valid-maxlength ng-dirty ng-touched" maxlength="100"></textarea>
-       <div class="btn btn-default" id="enregistrer">Enregistrer</div>
-       <div class="btn btn-default" id="effacer">Effacer</div>
-   </div>
+<body data-ng-controller="MainController as mainCtrl">
+<div class="panel panel-primary">
+<div class="panel-heading panel-primary">Ex 1 : Note Application</div>
+    <div class="panel-body">
+       <div class="form-group">
+           <label for="messageNote">Note :</label>
+           <textarea data-ng-model="mainCtrl.messageNote" name="messageNote" id="messageNote" cols="40" rows="5" class="form-control ng-valid ng-valid-maxlength ng-dirty ng-touched" maxlength="100"></textarea>
+           <div class="btn btn-primary" id="enregistrer">Enregistrer</div>
+           <div class="btn btn-primary" id="effacer">Effacer</div>
+           <div class="alert alert-info alert-dismissible" data-ng-class="mainCtrl.status" role="alert">
+               Nombre de caractères restant :
+               <span data-ng-bind="mainCtrl.count()" class="ng-binding">
+                   100
+               </span>
+           </div>
+       </div>
+    </div>
 </div>
+
 </body>
 </html>
