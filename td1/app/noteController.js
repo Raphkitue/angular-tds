@@ -6,10 +6,11 @@ angular.module("noteApp").controller("MainController",function(){
     this.info = "";
     this.status="";
     this.save = function(){
-        return this.message;
+        this.info="Sauvegarde réussie !";
     };
     this.clear = function(){
-        return null;
+        this.messageNote="";
+        this.info="";
     };
     this.count = function(){
         var nb= 100 -this.messageNote.length;
