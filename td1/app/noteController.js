@@ -12,8 +12,15 @@ angular.module("noteApp").controller("MainController",function(){
         return null;
     };
     this.count = function(){
-        this.status="alert-"
-        return 100 -this.messageNote.length;
+        var nb= 100 -this.messageNote.length;
+            if(nb<50 && nb>=20)
+                this.status="alert-warning";
+            else if(nb<20)
+                this.status="alert-danger";
+            else
+                this.status="alert-info"
+
+        return nb;
 
     };
 });
