@@ -2,6 +2,7 @@
 <html lang="en" data-ng-app="noteApp">
 <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     <script src="app/noteApp.js"></script>
     <script src="app/noteController.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -14,7 +15,7 @@
     <div class="panel-body">
        <div class="form-group">
            <label for="messageNote">Note :</label>
-           <textarea data-ng-change = ""data-ng-model="mainCtrl.messageNote" name="messageNote" id="messageNote" cols="40" rows="5" class="form-control ng-valid ng-valid-maxlength ng-dirty ng-touched" maxlength="100"></textarea>
+           <textarea data-ng-change = "mainCtrl.info='Note modifiee'"data-ng-model="mainCtrl.messageNote" name="messageNote" id="messageNote" cols="40" rows="5" class="form-control ng-valid ng-valid-maxlength ng-dirty ng-touched" maxlength="100"></textarea>
            <div class="btn btn-primary" data-ng-click="mainCtrl.save()" id="enregistrer">Enregistrer</div>
            <div class="btn btn-primary" data-ng-click="mainCtrl.clear()" id="effacer">Effacer</div>
            <div class="alert alert-dismissible" data-ng-class="mainCtrl.status" role="alert">
@@ -23,8 +24,9 @@
                    100
                </span>
            </div>
-           <div class="alert alert-success" name="info" id="info"  datadata-ng-model="mainCtrl.info">
-
+           <div data-ng-class="{'alert-warning': mainCtrl.count()<50 && mainCtrl.info!='Note sauvegardée','alert-danger':mainCtrl.count()<20 && mainCtrl.info!='Note sauvegardée','alert-success':mainCtrl.info=='Note sauvegardée'}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="mainCtrl.info">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close" data-ng-click="mainCtrl.info=''"><span aria-hidden="true">×</span></button>
+               <span  data-ng-bind="mainCtrl.info" class="ng-binding"></span>
            </div>
 
        </div>

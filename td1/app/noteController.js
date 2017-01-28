@@ -1,12 +1,15 @@
 /**
  * Created by raph_ on 27/01/2017.
  */
-angular.module("noteApp").controller("MainController",function(){
-    this.messageNote="";
+angular.module("noteApp",['ngCookies']).controller("MainController",['$cookies',function($cookies){
+    this.messageNote=$cookies.get('message');
     this.info = "";
     this.status="";
     this.save = function(){
-        this.info="Sauvegarde réussie !";
+        if(this.messageNote!="") {
+            this.info = "Note sauvegardée";
+            $cookies.put('message',this.messageNote);
+        }
     };
     this.clear = function(){
         this.messageNote="";
@@ -24,4 +27,4 @@ angular.module("noteApp").controller("MainController",function(){
         return nb;
 
     };
-});
+}]);
