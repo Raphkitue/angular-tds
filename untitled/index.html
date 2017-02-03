@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr-fr" data-ng-app="ServicesApp">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="app/servicesApp.js"></script>
+    <script src="app/fr.js"></script>
+    <script src="app/servicesController.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <meta charset="UTF-8">
+    <title>TD2</title>
+</head>
+<body data-ng-controller="ServicesController as servicesCtrl">
+
+
+<form class = "">
+    <h1>Services</h1>
+    <div class = "alert alert-info">Choisissez les éléments à inclure :
+        <ng-pluralize count="servicesCtrl.servicesActifs"
+                      when="{'0': 'Aucun service selectionné',
+                       'one': '1 service selectionné',
+                       'other': '{} services selectionnés'}">
+        </ng-pluralize><br>
+    </div>
+    <ul>
+        <li ng-repeat="serviceSeul in servicesCtrl.services" ng-click="servicesCtrl.toggleActive(serviceSeul)" ng-class="{active:serviceSeul.active}">
+            {{serviceSeul.name}} {{serviceSeul.price|currency}}
+        </li>
+    </ul>
+    <div class="total"></div>
+    <div><div class="input-group"></div></div>
+    <div class = "total" ng-show="false"></div>
+</form>
+
+</body>
+</html>
