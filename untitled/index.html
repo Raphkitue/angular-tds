@@ -7,14 +7,78 @@
     <script src="app/fr.js"></script>
     <script src="app/servicesController.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    #services{
+        background-color: #61a1bc;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px #ccc;
+        width: 500px;
+        padding: 35px 60px;
+        margin: 0px auto;
+    }
 
+    #services h1{
+        color:#fff;
+        font-size:50px;
+        font-family:'Century gothic', cursive;
+        font-weight: normal;
+        line-height:1;
+        text-shadow:0 3px 0 rgba(0,0,0,0.1);
+    }
+
+    #services ul{
+        list-style:none;
+        color:#fff;
+        font-size:20px;
+        font-weight:bold;
+        text-align: left;
+        margin:20px 0 15px;
+        padding: 0px;
+    }
+
+    #services ul li{
+        padding:20px 30px;
+        background-color:#777;
+        margin-bottom:8px;
+        box-shadow:0 1px 1px rgba(0,0,0,0.1);
+        cursor:pointer;
+        border-radius:4px;
+    }
+
+    #services ul li span{
+        float:right;
+    }
+
+    #services ul li.active{
+        background-color:#8ec16d;
+    }
+
+    #services div.total{
+        border-top:1px solid rgba(255,255,255,0.5);
+        padding:15px 30px;
+        font-size:20px;
+        font-weight:bold;
+        text-align: left;
+        color:#fff;
+    }
+
+    #services div.total span{
+        float:right;
+    }
+    #services .alert{
+        text-align: left;
+    }
+    #services .alert p{
+        font-weight: bold;
+    }
+</style>
     <meta charset="UTF-8">
     <title>TD2</title>
 </head>
 <body data-ng-controller="ServicesController as servicesCtrl">
 
 
-<form class = "">
+<form id="services" class = "">
     <h1>Services</h1>
     <div class = "alert alert-info">Choisissez les éléments à inclure :
         <ng-pluralize count="servicesCtrl.servicesActifs"
