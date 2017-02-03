@@ -89,12 +89,22 @@
     </div>
     <ul>
         <li ng-repeat="serviceSeul in servicesCtrl.services" ng-click="servicesCtrl.toggleActive(serviceSeul)" ng-class="{active:serviceSeul.active}">
-            {{serviceSeul.name}} {{serviceSeul.price|currency}}
+            {{serviceSeul.name}} <span class="ng-binding">{{serviceSeul.price|currency}}</span>
         </li>
     </ul>
-    <div class="total"></div>
-    <div><div class="input-group"></div></div>
-    <div class = "total" ng-show="false"></div>
+    <div class="total">Total :  <span data-ng-bind ="servicesCtrl.total()|currency" class="ng-binding"></span> </div>
+
+    <div><div class="input-group">
+        <span class="input-group-addon">
+        <input type="checkbox" ng-model="servicesCtrl.selPromo" ng-click="" >
+        </span>
+        <input type="text" class="form-control" aria-label="..." ng-model="servicesCtrl.codePromo" placeholder="Code promo" ></div></div>
+    <div class = "total" ng-show="servicesCtrl.selPromo">
+
+        <div class="total">Total avec remise :  <span data-ng-bind ="servicesCtrl.total()*servicesCtrl.reduction|currency" class="ng-binding"></span>
+        </div>
+
+    </div>
 </form>
 
 </body>

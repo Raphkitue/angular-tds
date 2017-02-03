@@ -1,7 +1,7 @@
 /**
  * Created by raph_ on 03/02/2017.
  */
-angular.module("ServicesApp").controller("ServicesController",function(){
+angular.module("ServicesApp").controller("ServicesController",['$http',function($http){
     this.services = [
         {
             "name": "Web Development",
@@ -23,7 +23,14 @@ angular.module("ServicesApp").controller("ServicesController",function(){
     ];
 
     this.total = function(){
+        var prix=0;
 
+        for (var i =0;i<this.services.length;i++){
+            if (this.services[i].active==true){
+                prix += this.services[i].price;
+            }
+        }
+        return prix;
     };
     this.toggleActive = function(service){
         if(service.active==false) {
@@ -36,5 +43,7 @@ angular.module("ServicesApp").controller("ServicesController",function(){
         }
     };
     this.servicesActifs = 1;
+    this.selPromo = false;
+    this.codePromo="";
 
-});
+}]);
