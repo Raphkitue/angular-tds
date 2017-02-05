@@ -94,17 +94,20 @@
     </ul>
     <div class="total">Total :  <span data-ng-bind ="servicesCtrl.total()|currency" class="ng-binding"></span> </div>
 
-    <div><div class="input-group">
-        <span class="input-group-addon">
-        <input type="checkbox" ng-model="servicesCtrl.selPromo" ng-click="" >
-        </span>
-        <input type="text" class="form-control" aria-label="..." ng-model="servicesCtrl.codePromo" placeholder="Code promo" ></div></div>
-    <div class = "total" ng-show="servicesCtrl.selPromo">
-
-        <div class="total">Total avec remise :  <span data-ng-bind ="servicesCtrl.total()*servicesCtrl.reduction|currency" class="ng-binding"></span>
+    <div>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <input type="checkbox" ng-model="servicesCtrl.selPromo" ng-click="servicesCtrl.verifierCode()" >
+            </span>
+            <input type="text" class="form-control" aria-label="..." ng-model="servicesCtrl.codePromo" placeholder="Code promo" ng-keyup="servicesCtrl.verifierCode()" >
         </div>
-
     </div>
+    <div class = "total" ng-show="servicesCtrl.selPromo">
+         <div class="total">Total avec remise :  <span data-ng-bind ="servicesCtrl.total()*servicesCtrl.reduction|currency" class="ng-binding"></span>
+        </div>
+    </div>
+
+
 </form>
 
 </body>

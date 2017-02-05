@@ -1,7 +1,7 @@
 /**
  * Created by raph_ on 03/02/2017.
  */
-angular.module("ServicesApp").controller("ServicesController",['$http',function($http){
+angular.module("ServicesApp").controller("ServicesController",['$http',function($http,$scope){
     this.services = [
         {
             "name": "Web Development",
@@ -21,6 +21,22 @@ angular.module("ServicesApp").controller("ServicesController",['$http',function(
             "active":false
         }
     ];
+    this.servicesActifs = 1;
+    this.selPromo = false;
+    this.codePromo="";
+    this.reduction=1.00;
+    this.charger = function(data){
+
+        this.codes = data.data;
+        console.log(this.codes);
+
+    }
+    this.codes=[];
+    this.test = function() {
+        ($http.get('app/promo.json')).then(this.charger(data));
+    }
+
+    this.test();
 
     this.total = function(){
         var prix=0;
@@ -42,8 +58,14 @@ angular.module("ServicesApp").controller("ServicesController",['$http',function(
             service.active=false;
         }
     };
-    this.servicesActifs = 1;
-    this.selPromo = false;
-    this.codePromo="";
+
+    this.verifierCode= function(){
+
+
+
+
+          return true;
+    };
+
 
 }]);
