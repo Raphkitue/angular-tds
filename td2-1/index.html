@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr-fr" data-ng-app="ListesApp">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="app/listesApp.js"></script>
+
+    <script src="app/listesController.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>#choixMultiples a, #choixMultiples a:visited {
+        outline:none;
+        color:#389dc1;
+    }
+
+    #choixMultiples a:hover{
+        text-decoration:none;
+    }
+
+    /*-------------------------
+        The order form
+    --------------------------*/
+
+    #choixMultiples{
+        background-color: #61a1bc;
+        border-radius: 2px;
+        box-shadow: 0 1px 1px #ccc;
+        padding: 10px 10px 15px 30px;
+        margin: 50px auto;
+    }
+
+    #choixMultiples h1{
+        color:#fff;
+        font-size:30px;
+        font-family:'Century gothic', cursive;
+        font-weight: normal;
+        line-height:1;
+        text-shadow:0 3px 0 rgba(0,0,0,0.1);
+    }
+
+    #choixMultiples ul{
+        list-style: none;
+        width: 428px;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    #choixMultiples ul li{
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    #choixMultiples ul li img{
+        width:60px;
+        height:60px;
+        float:left;
+        border:none;
+    }
+
+    #choixMultiples ul li p{
+        margin-left: 75px;
+        font-weight: bold;
+        padding-top: 12px;
+        color:#6e7a7f;
+    }
+
+    #choixMultiples div.inline-block{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .list-btn{
+        width: 70px;
+        display: block!important;
+        margin: 12px 6px
+    }
+    #choixMultiples select{
+        min-width: 500px;
+    }</style>
+</head>
+<body data-ng-controller="ListesController as listesCtrl">
+<form class="img-rounded" id="choixMultiples">
+    <div ng-show="listesCtrl.step==1" class="">
+        <h1>Sélectionnez vos produits</h1>
+        <div class="form-group">
+            <div class="inline-block">
+                <select title="Double-cliquez pour ajouter" class="form-control" ng-model="listesCtrl.selectedDispoItems" ng-dblclick="listesCtrl.addToIncluded()" ng-options="item.title for item in listesCtrl.dispoItems" size="10" multiple="multiple">
+                </select>
+            </div>
+            <div class ="inline-block">
+                <div ng-click = "listesCtrl.addToIncluded()" class ="btn btn-primary list-btn glyphicon glyphicon-step-forward"></div>
+                <div ng-click = "listesCtrl.addAllToIncluded()" class ="btn btn-primary list-btn glyphicon glyphicon-fast-forward"></div>
+                <div ng-click = "listesCtrl.removeFromIncluded()" class ="btn btn-primary list-btn glyphicon glyphicon-step-backward"></div>
+                <div ng-click = "listesCtrl.removeAllFromIncluded()" class ="btn btn-primary list-btn glyphicon glyphicon-fast-backward"></div>
+            </div>
+            <div class="inline-block">
+                <select title="Double-cliquez pour supprimer" class="form-control" ng-model="listesCtrl.selectedIncludedItems" ng-dblclick="listesCtrl.removeFromIncluded()" ng-options="item.title for item in listesCtrl.includedItems" size="10" multiple="multiple">
+                </select>
+            </div>
+        </div>
+        <div>
+            <ng-pluralize count="listesCtrl.includedItems.length"
+                          when="{'0': 'Aucun produit selectionné',
+                       'one': '1 produit selectionné',
+                       'other': '{} produits selectionnés'}">
+            </ng-pluralize>
+        </div>
+    </div>
+
+    <div ng-show="step==2" class="">
+    </div>
+</form>
+
+</body>
+</html>
