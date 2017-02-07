@@ -25,18 +25,15 @@ angular.module("ServicesApp").controller("ServicesController",['$http',function(
     this.selPromo = false;
     this.codePromo="";
     this.reduction=1.00;
-    this.charger = function(data){
-
-        this.codes = data.data;
-        console.log(this.codes);
-
-    }
     this.codes=[];
-    this.test = function() {
-        ($http.get('app/promo.json')).then(this.charger(data));
-    }
 
-    this.test();
+    ($http.get('app/promo.json')).then(function(data){
+        self.codes = data.data;
+        console.log(self.codes);
+    });
+
+
+
 
     this.total = function(){
         var prix=0;
@@ -60,11 +57,13 @@ angular.module("ServicesApp").controller("ServicesController",['$http',function(
     };
 
     this.verifierCode= function(){
-
-
-
-
-          return true;
+        console.log(JSON.stringify(self.codes));
+        if (this.codePromo.length>0 && self.codes[this.codePromo]){
+            this.reduction=1-self.codes[this.codePromo];
+        }
+        else{
+            this.reduction=1;
+        }
     };
 
 

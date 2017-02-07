@@ -99,10 +99,14 @@
             <span class="input-group-addon">
                 <input type="checkbox" ng-model="servicesCtrl.selPromo" ng-click="servicesCtrl.verifierCode()" >
             </span>
-            <input type="text" class="form-control" aria-label="..." ng-model="servicesCtrl.codePromo" placeholder="Code promo" ng-keyup="servicesCtrl.verifierCode()" >
+            <input type="text" class="form-control" ng-model="servicesCtrl.codePromo" placeholder="Code promo" ng-keyup="servicesCtrl.verifierCode()" >
         </div>
     </div>
     <div class = "total" ng-show="servicesCtrl.selPromo">
+        <div >Remise : <span ng-hide="servicesCtrl.reduction==1" data-ng-bind ="servicesCtrl.total()*(1-servicesCtrl.reduction)|currency" class="ng-binding"></span>
+        <span ng-show="servicesCtrl.reduction==1">Code promo invalide</span>
+
+        </div>
          <div class="total">Total avec remise :  <span data-ng-bind ="servicesCtrl.total()*servicesCtrl.reduction|currency" class="ng-binding"></span>
         </div>
     </div>
