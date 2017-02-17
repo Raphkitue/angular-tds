@@ -4,7 +4,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
     <script src="app/ContactApp.js"></script>
-
+    <script src="app/directives.js"></script>
     <script src="app/contactController.js"></script>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -18,18 +18,39 @@
         <div class ="panel panel-body">
 
             <input type="text" placeholder = "Filter..." />
-            <table>
-
+            <table class = "table table-striped">
+                <tr ng-repeat="contact in contactCtrl.contacts" contact-elem contact="contact"></tr>
             </table>
-            <div class = "btn btn-primary" >
+            <div class = "btn btn-primary" ng-click="contactCtrl.toAdd()">
                 Ajouter...
+            </div>
+            <div ng-show="contactCtrl.tmpContact.length" class = "btn btn-danger">
+                <ng-pluralize count="contactCtrl.tmpContact.length" when="{'0': 'Aucun contact trouvé',
+                       'one': 'Annuler la suppression.',
+                       'other': 'Annuler la suppression ({}).'}" >
+
+                </ng-pluralize>
+            </div>
+            <div ng-show="contactCtrl.operation">
+                <br/><br/>
+                {{contactCtrl.operation}}
+                <hr>
+                <input type="text" placeholder="Entrez un nom..." ng-model = "contactCtrl.tmpContact.nom"/>
+                <input type="text" placeholder="Prénom..."ng-model = "contactCtrl.tmpContact.prenom"/>
+                <input type="text" placeholder="Adresse email..."ng-model = "contactCtrl.tmpContact.adresse"/>
+                <div class = "btn btn-primary">Valider</div>
+                <div class = "btn btn-primary">Annuler</div>
+
+
             </div>
         </div>
         <div class="panel panel-footer"><ng-pluralize count="contactCtrl.contacts.length" when="{'0': 'Aucun contact trouvé',
                        'one': '1 contact trouvé',
                        'other': '{} contacts trouvés'}" >
 
-        </ng-pluralize></div>
+        </ng-pluralize>
+        </div>
+
     </div>
 
 </body>
