@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  lang="fr-fr" data-ng-app="ContactApp">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="app/ContactApp.js"></script>
+
+    <script src="app/contactController.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body data-ng-controller="ContactController as contactCtrl">
+
+    <div class = "panel panel-primary">
+        <div class ="panel panel-heading">Contacts</div>
+        <div class ="panel panel-body">
+
+            <input type="text" placeholder = "Filter..." />
+            <table>
+
+            </table>
+            <div class = "btn btn-primary" >
+                Ajouter...
+            </div>
+        </div>
+        <div class="panel panel-footer"><ng-pluralize count="contactCtrl.contacts.length" when="{'0': 'Aucun contact trouvé',
+                       'one': '1 contact trouvé',
+                       'other': '{} contacts trouvés'}" >
+
+        </ng-pluralize></div>
+    </div>
+
+</body>
+</html>
