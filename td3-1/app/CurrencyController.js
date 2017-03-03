@@ -6,15 +6,17 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http',  functio
     var self = this;
 
     this.currencies ;
-    this.from = "EUR";
-    this.to = "USD";
+    this.from ;
+    this.to ;
     this.what = 1;
 
-    this.result ;
+    this.result=12 ;
 
 
     $http.get('app/currencymap.json').then(function(response) {
             self.currencies = response.data;
+            self.from = self.currencies["EUR"];
+            self.to=self.currencies["USD"];
         },
         function(response) {
             console.log("Erreur avec le statut Http : "+response.status);
@@ -32,7 +34,8 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http',  functio
 
         $http.jsonp('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+self.from.code+'_'+self.to.code, {jsonpCallbackParam: 'callback'})
             .then(function(response) {
-                self.result=response.data[self.from.code+'_'+self.to.code].val;
+                console.log(response.data);
+                self.result=response.data[self.from.code+'_'+self.to.code].val*self.what;
 
             });
     };

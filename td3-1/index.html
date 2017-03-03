@@ -19,10 +19,10 @@
 
             <form class="form-group form-inline">
                 <input class="form-control" type="number" size="5" placeholder="1" data-ng-model="currencyCtrl.what"/>
-                <select data-ng-options="v.code as (v.code + ' - ' + v.name) for (k,v) in currencyCtrl.currencies" ng-model="currencyCtrl.from" class="form-control ng-pristine ng-valid ng-touched">
+                <select data-ng-options="v.code + ' - ' + v.name for (k,v) in currencyCtrl.currencies" data-ng-model="currencyCtrl.from" class="form-control ng-pristine ng-valid ng-touched">
                 </select>
-                <a href="#" data-ng-click="currCtrl.swap()">↔</a>
-                <select  data-ng-options="v.code as (v.code + ' - ' + v.name) for (k,v) in currencyCtrl.currencies" ng-model="currencyCtrl.to" class="form-control ng-pristine ng-valid ng-touched">
+                <a href="#" data-ng-click="currencyCtrl.swap()">↔</a>
+                <select  data-ng-options="v.code + ' - ' + v.name for (k,v) in currencyCtrl.currencies" data-ng-model="currencyCtrl.to" class="form-control ng-pristine ng-valid ng-touched">
                 </select>
                 <input type="button" value="Convertir" class="btn btn-primary" size="5" data-ng-click="currencyCtrl.getResult()">
                 <input type="text" class="form-control" data-ng-model="currencyCtrl.result" size="5" readonly="readonly">
