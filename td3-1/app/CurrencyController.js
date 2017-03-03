@@ -1,7 +1,7 @@
 /**
  * Created by raph_ on 03/03/2017.
  */
-angular.module("CurrencyApp").controller("CurrencyController",['$http', '$sce', function($http,$sce) {
+angular.module("CurrencyApp").controller("CurrencyController",['$http',  function($http) {
 
     var self = this;
 
@@ -13,8 +13,7 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http', '$sce', 
     this.result ;
 
 
-    $http.get('../app/currencymap.json').
-    then(function(response) {
+    $http.get('app/currencymap.json').then(function(response) {
             self.currencies = response.data;
         },
         function(response) {
@@ -22,17 +21,23 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http', '$sce', 
         }
     );
 
+    this.swap = function (){
+        var tmp = self.from;
+        self.from = self.to;
+        self.to = tmp;
+    };
 
+    this.getResult = function(){
+
+
+        $http.jsonp('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+self.from.code+'_'+self.to.code, {jsonpCallbackParam: 'callback'})
+            .then(function(response) {
+                self.result=response.data[self.from.code+'_'+self.to.code].val;
+
+            });
+    };
 
 
 
 
 }]);
-angular.module('CurrencyApp', [])
-    .config(['$sceDelegateProvider', function($sceDelegateProvider) {
-        // We must whitelist the JSONP endpoint that we are using to show that we trust it
-        $sceDelegateProvider.resourceUrlWhitelist([
-            'self',
-            'https://free.currencyconverterapi.com/**'
-        ]);
-    }]);
