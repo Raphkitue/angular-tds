@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html  lang="fr-fr" data-ng-app="CurrencyApp">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="app/ContactApp.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/contactController.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body data-ng-controller="CurrencyController as currencyCtrl">
+
+    <div class="panel panel-primary" data-ngcloak="">
+        <div class="panel-heading">Ex 3 : Currency Application</div>
+        <div class="panel-body">
+
+            <form class="form-group form-inline">
+                <input class="form-control" type="number" size="5" placeholder="1" data-ng-model="currencyCtrl.what"/>
+                <select data-ng-options="v.code as (v.code + ' - ' + v.name) for (k,v) in currencyCtrl.currencies" data-ng-model="currencyCtrl.from" class="form-control ng-pristine ng-valid ng-touched">
+                </select>
+                <a href="#" data-ng-click="currCtrl.swap()">↔</a>
+                <select  data-ng-options="v.code as (v.code + ' - ' + v.name) for (k,v) in currencyCtrl.currencies" data-ng-model="currencyCtrl.to" class="form-control ng-pristine ng-valid ng-touched">
+                </select>
+                <input type="button" value="Convertir" class="btn btn-primary" size="5" data-ng-click="currencyCtrl.getResult()">
+                <input type="text" class="form-control" data-ng-model="currencyCtrl.result" size="5" readonly="readonly">
+                <input type="checkbox" data-ng-model="currencyCtrl.historique"/>Historique
+            </form>
+
+
+
+        </div>
+        <div class="container-fluid" data-ng-show="currencyCtrl.historique">
+
+        </div>
+    </div>
+</body>
