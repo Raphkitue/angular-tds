@@ -47,11 +47,11 @@
                             <th></th>
                         </tr>
                         <tr class="animate-repeat ng-scope" data-ng-repeat="conversion in currencyCtrl.historique"  data-ng-class="{'info':conversion.update,'danger': conversion.delta<0,'success':conversion.delta>0}">
-                            <td class="ng-binding">{{conversion.from}}</td>
-                            <td class="ng-binding">{{conversion.to}}</td>
+                            <td class="ng-binding">{{conversion.from.code}}</td>
+                            <td class="ng-binding">{{conversion.to.code}}</td>
                             <td class="text-center ng-binding">{{conversion.rate}}</td>
-                            <td class="text-center ng-binding">{{conversion.amount}}</td>
-                            <td class="text-center ng-binding">{{conversion.date}}</td>
+                            <td class="text-center ng-binding">{{conversion.amount()}}</td>
+                            <td class="text-center ng-binding">{{conversion.date.getDate()}}/{{conversion.date.getMonth()+1}}/{{conversion.date.getFullYear()}}</td>
                             <td class="text-center ng-binding">{{conversion.delta}}</td>
                         </tr>
                         <tr>
