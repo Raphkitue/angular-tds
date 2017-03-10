@@ -26,13 +26,52 @@
                 </select>
                 <input type="button" value="Convertir" class="btn btn-primary" size="5" data-ng-click="currencyCtrl.getResult()">
                 <input type="text" class="form-control" data-ng-model="currencyCtrl.result" size="5" readonly="readonly">
-                <input type="checkbox" data-ng-model="currencyCtrl.historique"/>Historique
+                <input type="checkbox" data-ng-model="currencyCtrl.affHisto"/>Historique
             </form>
 
 
 
         </div>
-        <div class="container-fluid" data-ng-show="currencyCtrl.historique">
+        <div class="container-fluid" data-ng-show="currencyCtrl.affHisto">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table table-striped">
+                        <tbody><tr>
+                            <th>De</th>
+                            <th>En</th>
+                            <th class="text-center">Tx</th>
+                            <th class="text-center">Montant</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Delta</th>
+                            <th></th>
+                        </tr>
+                        <tr class="animate-repeat ng-scope" data-ng-repeat="conversion in currencyCtrl.historique"  data-ng-class="{'info':conversion.update,'danger': conversion.delta<0,'success':conversion.delta>0}">
+                            <td class="ng-binding">{{conversion.from}}</td>
+                            <td class="ng-binding">{{conversion.to}}</td>
+                            <td class="text-center ng-binding">{{conversion.rate}}</td>
+                            <td class="text-center ng-binding">{{conversion.amount}}</td>
+                            <td class="text-center ng-binding">{{conversion.date}}</td>
+                            <td class="text-center ng-binding">{{conversion.delta}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <form class="form-inline ng-valid ng-dirty ng-valid-parse" style="">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" title="Auto-refresh" class="ng-valid ng-dirty ng-valid-parse ng-touched" style="">
+                                    </span>
+                                        <input type="number" class="form-control ng-pristine ng-untouched ng-valid"">
+                                        <span class="input-group-btn">
+                                    <button class="btn btn-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                                    </span>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </div>
+            </div>
 
         </div>
     </div>

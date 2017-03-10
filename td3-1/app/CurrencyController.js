@@ -9,8 +9,8 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http',  functio
     this.from ;
     this.to ;
     this.what = 1;
+    this.result=0 ;
 
-    this.result=12 ;
 
 
     $http.get('app/currencymap.json').then(function(response) {
@@ -36,11 +36,49 @@ angular.module("CurrencyApp").controller("CurrencyController",['$http',  functio
             .then(function(response) {
                 console.log(response.data);
                 self.result=response.data[self.from.code+'_'+self.to.code].val*self.what;
-
+                var conversion={
+                    from : self.from,
+                    to : self.to,
+                    amount : function(){ return self.what*this.rate},
+                    initialAmount : function(){ return self.what*this.initialRate},
+                    delta : 0,
+                    rate : val,
+                    what : self.what,
+                    date : new Date(),
+                    update: false,
+                    initialRate : val
+                };
+                var key=self.from+self.to;
+                if(self.historique[key]){
+                    var oldConversion=self.historique[key];
+                    oldConversion.what=self.what;
+                    conversion.delta=conversion.amount()-oldConversion.initialAmount();
+                    conversion.initialRate=oldConversion.initialRate;
+                }
+                conversion.update=false;
+                self.historique[key]=conversion;
             });
     };
 
 
 
+    this.conversion={from :"", //monnaie1,
+        to :"", //monnaie2,
+        amount : function() {}, //retourne le montant (tx* somme) },
+        initialAmount : function () {},
+        delta :"",
+        rate:"",
+        what:"",
+        date:"",
+        update:"",
+        initialRate:""
+
+    };
+    this.affHisto=false;
+    this.historique = [
+
+
+
+    ];
 
 }]);
